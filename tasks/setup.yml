@@ -1,0 +1,44 @@
+---
+- assert:
+    that:
+     - "traefik_acme_email is defined"
+
+- name: Creates directories
+  file: path="{{ item }}" owner=root group=root state=directory
+  with_items: "{{ traefik_dirs }}"
+
+- name: Create traefik systemd service
+  template:
+    src: "{{ traefik_systemd_service_template }}"
+    dest: "{{ traefik_systemd_service_dest }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload systemd daemon
+    - restart traefik
+
+- name: Generate traefik config file
+  template:
+    src: "{{ traefik_template }}"
+    dest: "{{ traefik_config_file }}"
+    owner: root
+    group: root
+    mode: 0744
+  notify:
+    - restart traefik
+
+- name: Setup Traefik binary
+  get_url:
+    url: "{{ traefik_binary_url }}"
+    dest: "{{ traefik_bin_path }}"
+    owner: root
+    group: root
+    mode: 0755
+    checksum: "{{ traefik_binary_checksum }}"
+
+- name: Ensure traefik service is enabled and running
+  service:
+    name: "{{ traefik_systemd_service_name }}"
+    state: started
+    enabled: yes

@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: Denis Podlesniy
+  description: Ansible role to deploy traefik binary and systemd service
+  license: MIT
+  min_ansible_version: 2.3
+  platforms:
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+  galaxy_tags:
+    - docker
+    - load_balancer
+  categories:
+    - web
+dependencies: []

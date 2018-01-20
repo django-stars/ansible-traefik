@@ -1,0 +1,6 @@
+---
+- name: reload systemd daemon
+  command: systemctl daemon-reload
+
+- name: restart traefik
+  command: "systemctl restart {{ traefik_systemd_service_name }}"
