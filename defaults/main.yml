@@ -1,10 +1,14 @@
 traefik_install_dir: "/usr/local/bin"
 traefik_debug: no
 traefik_domain: "traefik.localhost"
-traefik_version: "v1.5.0-rc5"
+
+traefik_version: "v1.6.6"
+traefik_binary_checksum_algorithm: "sha256"
+traefik_binary_checksum: "5202ef95b11380f9484594c80baeee17ee3cc6c8076ffa142f5d4d5b0ecba9ee"
 traefik_binary_url: "https://github.com/containous/traefik/releases/download/{{ traefik_version }}/traefik_linux-amd64"
-traefik_binary_checksum: "sha256:a3dae1b4f76d92c7946ebeb3e8398877fb27683fb3818043109b345b2fac970a"
-traefik_bin_path: "{{ traefik_install_dir }}/traefik"
+
+traefik_binary_path: "{{ traefik_install_dir }}/traefik"
+traefik_logs_dir: "/var/log/traefik"
 traefik_config_dir: "/etc/traefik"
 traefik_config_file: "{{ traefik_config_dir }}/traefik.toml"
 traefik_acme_file: "{{ traefik_config_dir }}/acme.json"
@@ -17,3 +21,4 @@ traefik_update: no
 
 traefik_dirs:
   - "{{ traefik_config_dir }}"
+  - "{{ traefik_logs_dir }}"

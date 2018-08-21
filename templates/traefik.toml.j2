@@ -4,6 +4,12 @@ checkNewVersion = true
 logLevel = "ERROR"
 defaultEntryPoints = ["http", "https"]
 
+[traefikLog]
+  filePath = "{{ traefik_logs_dir }}/traefik.log"
+
+[accessLog]
+  filePath = "{{ traefik_logs_dir }}/access.log"
+
 [entryPoints]
   [entryPoints.http]
   address = ":80"
@@ -29,7 +35,7 @@ OnHostRule = true
   [acme.httpChallenge]
   entryPoint = "http"
 
-# Enable web backend.
-[web]
+# Enable UI and API.
+[api]
 address = "127.0.0.1:8080"
 readOnly = true
