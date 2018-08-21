@@ -28,14 +28,27 @@
   notify:
     - restart traefik
 
+- stat:
+    path: "{{ traefik_binary_path }}"
+    checksum_algorithm: "{{ traefik_binary_checksum_algorithm }}"
+  register: stat_traefik_binary
+
+- name: Stop service Traefik
+  service:
+    name: traefik
+    state: stopped
+  when:
+    - stat_traefik_binary.stat.exists
+    - stat_traefik_binary.stat.checksum != traefik_binary_checksum
+
 - name: Setup Traefik binary
   get_url:
     url: "{{ traefik_binary_url }}"
-    dest: "{{ traefik_bin_path }}"
+    dest: "{{ traefik_binary_path }}"
     owner: root
     group: root
     mode: 0755
-    checksum: "{{ traefik_binary_checksum }}"
+    checksum: "{{ traefik_binary_checksum_algorithm }}:{{ traefik_binary_checksum }}"
 
 - name: Ensure traefik service is enabled and running
   service:
