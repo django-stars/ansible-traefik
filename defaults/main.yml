@@ -1,11 +1,10 @@
 traefik_install_dir: "/usr/local/bin"
 traefik_debug: no
 traefik_domain: "traefik.localhost"
-
 traefik_version: "v1.6.6"
+traefik_binary_url: "https://github.com/containous/traefik/releases/download/{{ traefik_version }}/traefik_linux-amd64"
 traefik_binary_checksum_algorithm: "sha256"
 traefik_binary_checksum: "5202ef95b11380f9484594c80baeee17ee3cc6c8076ffa142f5d4d5b0ecba9ee"
-traefik_binary_url: "https://github.com/containous/traefik/releases/download/{{ traefik_version }}/traefik_linux-amd64"
 
 traefik_binary_path: "{{ traefik_install_dir }}/traefik"
 traefik_logs_dir: "/var/log/traefik"
