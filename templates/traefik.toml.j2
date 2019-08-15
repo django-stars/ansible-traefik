@@ -5,10 +5,10 @@ logLevel = "ERROR"
 defaultEntryPoints = ["http", "https"]
 
 [traefikLog]
-  filePath = "{{ traefik_logs_dir }}/traefik.log"
+filePath = "{{ traefik_logs_dir }}/traefik.log"
 
 [accessLog]
-  filePath = "{{ traefik_logs_dir }}/access.log"
+filePath = "{{ traefik_logs_dir }}/access.log"
 
 [entryPoints]
   [entryPoints.http]
@@ -17,7 +17,7 @@ defaultEntryPoints = ["http", "https"]
     entryPoint = "https"
   [entryPoints.https]
   address = ":443"
-  [entryPoints.https.tls]
+    [entryPoints.https.tls]
 
 [retry]
 
